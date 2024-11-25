@@ -1,9 +1,11 @@
 package com.prodmanager.product.controllers;
 
 import com.prodmanager.product.entities.User;
-import com.prodmanager.product.repositories.UserRepository;
+import com.prodmanager.product.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,16 +15,19 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
-    private final UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        User user = userService.findUserById(id);
+        return ResponseEntity.ok().body(user);
     }
 
 }

@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProdManagerApplication {
 
 	public static void main(String[] args) {
-
 		Dotenv dotenv = Dotenv.configure().load();
 		System.setProperty("DB_DRIVER", dotenv.get("DB_DRIVER"));
 		System.setProperty("DB_URL", dotenv.get("DB_URL"));
