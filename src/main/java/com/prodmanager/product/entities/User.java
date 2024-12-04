@@ -69,10 +69,6 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
